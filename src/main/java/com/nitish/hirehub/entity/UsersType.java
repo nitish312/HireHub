@@ -5,17 +5,20 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user_type")
+@Table(name = "users_type")
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userTypeId;
 
     private String userTypeName;
 
     @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
     private List<Users> users;
+
+    public UsersType() {
+    }
 
     public UsersType(int userTypeId, String userTypeName, List<Users> users) {
         this.userTypeId = userTypeId;
@@ -54,4 +57,5 @@ public class UsersType {
                 ", userTypeName='" + userTypeName + '\'' +
                 '}';
     }
+
 }

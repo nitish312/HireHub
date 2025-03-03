@@ -6,13 +6,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "job_seeker_profile")
-public class JonSeekerProfile {
+public class JobSeekerProfile {
 
     @Id
     private int userAccountId;
 
     @OneToOne
-    @JoinColumn(name = "userAccount_id")
+    @JoinColumn(name = "user_account_id")
     @MapsId
     private Users userId;
 
@@ -21,8 +21,8 @@ public class JonSeekerProfile {
     private String city;
     private String state;
     private String country;
-    private String workAuthorizatoin;
-    private String employeeType;
+    private String workAuthorization;
+    private String employmentType;
     private String resume;
 
     @Column(nullable = true, length = 64)
@@ -31,14 +31,14 @@ public class JonSeekerProfile {
     @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL, mappedBy = "jobSeekerProfile")
     private List<Skills> skills;
 
-    public JonSeekerProfile() {
+    public JobSeekerProfile() {
     }
 
-    public JonSeekerProfile(Users userId) {
+    public JobSeekerProfile(Users userId) {
         this.userId = userId;
     }
 
-    public JonSeekerProfile(int userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String workAuthorizatoin, String employeeType, String resume, String profilePhoto, List<Skills> skills) {
+    public JobSeekerProfile(int userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String workAuthorization, String employmentType, String resume, String profilePhoto, List<Skills> skills) {
         this.userAccountId = userAccountId;
         this.userId = userId;
         this.firstName = firstName;
@@ -46,8 +46,8 @@ public class JonSeekerProfile {
         this.city = city;
         this.state = state;
         this.country = country;
-        this.workAuthorizatoin = workAuthorizatoin;
-        this.employeeType = employeeType;
+        this.workAuthorization = workAuthorization;
+        this.employmentType = employmentType;
         this.resume = resume;
         this.profilePhoto = profilePhoto;
         this.skills = skills;
@@ -109,20 +109,20 @@ public class JonSeekerProfile {
         this.country = country;
     }
 
-    public String getWorkAuthorizatoin() {
-        return workAuthorizatoin;
+    public String getWorkAuthorization() {
+        return workAuthorization;
     }
 
-    public void setWorkAuthorizatoin(String workAuthorizatoin) {
-        this.workAuthorizatoin = workAuthorizatoin;
+    public void setWorkAuthorization(String workAuthorization) {
+        this.workAuthorization = workAuthorization;
     }
 
-    public String getEmployeeType() {
-        return employeeType;
+    public String getEmploymentType() {
+        return employmentType;
     }
 
-    public void setEmployeeType(String employeeType) {
-        this.employeeType = employeeType;
+    public void setEmploymentType(String employmentType) {
+        this.employmentType = employmentType;
     }
 
     public String getResume() {
@@ -151,7 +151,7 @@ public class JonSeekerProfile {
 
     @Override
     public String toString() {
-        return "JonSeekerProfile{" +
+        return "JobSeekerProfile{" +
                 "userAccountId=" + userAccountId +
                 ", userId=" + userId +
                 ", firstName='" + firstName + '\'' +
@@ -159,8 +159,8 @@ public class JonSeekerProfile {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
-                ", workAuthorizatoin='" + workAuthorizatoin + '\'' +
-                ", employeeType='" + employeeType + '\'' +
+                ", workAuthorization='" + workAuthorization + '\'' +
+                ", employmentType='" + employmentType + '\'' +
                 ", resume='" + resume + '\'' +
                 ", profilePhoto='" + profilePhoto + '\'' +
                 ", skills=" + skills +

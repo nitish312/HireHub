@@ -18,7 +18,9 @@ import java.util.Optional;
 @Controller
 public class UsersController {
 
+    @Autowired
     private final UsersTypeService usersTypeService;
+    @Autowired
     private final UsersService usersService;
 
     @Autowired
@@ -28,28 +30,24 @@ public class UsersController {
     }
 
     @GetMapping("/register")
-    public String register(Model model){
-        List<UsersType> userTypes = usersTypeService.getAll();
-        model.addAttribute("getAllTypes", userTypes);
+    public String register(Model model) {
+        List<UsersType> usersTypes = usersTypeService.getAll();
+        model.addAttribute("getAllTypes", usersTypes);
         model.addAttribute("user", new Users());
         return "register";
     }
 
     @PostMapping("/register/new")
-    public String userRegistration(@Valid Users users, Model model){
-//        System.out.println("Users :: " + users);
-
-        Optional<Users> optionalUser = usersService.getUserByEmail(users.getEmail());
-
-        if(optionalUser.isPresent()){
-            model.addAttribute("error", "Email already registered, try to login or register with new email");
-            List<UsersType> userTypes = usersTypeService.getAll();
-            model.addAttribute("getAllTypes", userTypes);
+    public String userRegistration(@Valid Users users, Model model) {
+        Optional<Users> optionalUsers = usersService.getUserByEmail(users.getEmail());
+        if (optionalUsers.isPresent()) {
+            model.addAttribute("error", "Email already registered,try to login or register with other email.");
+            List<UsersType> usersTypes = usersTypeService.getAll();
+            model.addAttribute("getAllTypes", usersTypes);
             model.addAttribute("user", new Users());
             return "register";
         }
-
         usersService.addNew(users);
-        return "dashboard";
+        return "redirect:/dashboard/";
     }
 }
