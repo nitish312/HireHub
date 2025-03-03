@@ -20,20 +20,23 @@ public class Users {
     @NotEmpty
     private String password;
 
-    private boolean inactive;
+    private boolean isActive;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date registrationDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType userTypeId;
 
-    public Users(int userId, String email, String password, boolean inactive, Date registrationDate, UsersType userTypeId) {
+    public Users() {
+    }
+
+    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
-        this.inactive = inactive;
+        this.isActive = isActive;
         this.registrationDate = registrationDate;
         this.userTypeId = userTypeId;
     }
@@ -62,12 +65,12 @@ public class Users {
         this.password = password;
     }
 
-    public boolean isInactive() {
-        return inactive;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setInactive(boolean inactive) {
-        this.inactive = inactive;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public Date getRegistrationDate() {
@@ -92,7 +95,7 @@ public class Users {
                 "userId=" + userId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", inactive=" + inactive +
+                ", isActive=" + isActive +
                 ", registrationDate=" + registrationDate +
                 ", userTypeId=" + userTypeId +
                 '}';
